@@ -19,7 +19,7 @@
 .container {
     height: 100%;
     width: 100%;
-    background-color: #13333f;
+    background-color: #161313;
     color: #ffffff;
     align-items: center;
     justify-content: center;
@@ -29,7 +29,7 @@
 .kalender {
     height: 55rem;
     width: 50rem;
-    background-color:#161313;
+    background-color:#1d1d20;
 }
 
 .venstre  {
@@ -61,7 +61,7 @@
     
 }
 
-.ukedager {
+.dagernavn {
     height: 5rem;
     width: 100%;
     padding: 0 0.4;
@@ -69,7 +69,7 @@
     align-items: center;
 }
 
-.ukedager div {
+.dagernavn div {
     font-size: 200%;
     width: 30%;
     align-items: center;
@@ -81,6 +81,22 @@ html {
     font-size:80%;
 }
 
+.dager {
+    display: flex;
+    width: 100%;
+    padding: 0.1rem;
+    flex-wrap: wrap;
+}
+
+.dager div {
+    font-size: 200%;
+    margin: 0.2rem;
+    height: 5rem;
+    width: 6.74rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
     
 </style>
 
@@ -102,7 +118,7 @@ html {
                         </div>
                     
             </div>
-            <div class="ukedager">
+            <div class="dagernavn">
                 <div>Mon</div>
                 <div>Tir</div>
                 <div>Ons</div>
