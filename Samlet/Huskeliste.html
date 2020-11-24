@@ -54,7 +54,6 @@ h1 {
     border-radius: 25px;
     width: 50px;
     background-color: #d1002c;
-    color: rgb(134, 237, 255);
     cursor: pointer;
     transition: .5s;
     margin: 0.25rem;
@@ -86,14 +85,14 @@ h1 {
 	border: none;
 	color: #fff;
 	font-size: 1.4rem;
-	width: 245px;
+	width: 370px;
 }
 
 .remove{
 	background: none;
 	outline: none;
 	border: none;
-	color: #E00;
+	color: #d1002c;
 	font-size: 1.4rem;
 	font-family: 'Bahnschrift', sans-serif;
 	cursor: pointer;
@@ -103,137 +102,44 @@ h1 {
 	background: none;
 	outline: none;
 	border: none;
-	color: rgb(22, 173, 60);
+	color: #fff;
 	font-size: 1.4rem;
 	font-family: 'Bahnschrift', sans-serif;
 	margin: 0 0.5rem;
 	cursor: pointer;
 }
-
-
-
-nav {
-        width: 100%;
-        height: 60px;
-        background-color: #fff;
-        }   
-             
-    nav p {
-        font-family: sans-serif;
-        color: #222;
-        font-size: 24px;
-        line-height: 55px;
-        float: left;
-        padding: 0px 30px;
-        }
-              
-    nav ul {
-        float: left;
-        }
-                   
-    nav ul li {
-        float: left;
-        list-style: none;
-        position: relative;
-        }
-         nav ul li a { 
-        display: block;
-        font-family: sans-serif;
-        color: #222;
-        font-size: 14px;
-        padding: 22px 14px;  
-        text-decoration: none;
-        }
-        
-          nav ul li ul { 
-        display: none;
-        position: absolute;
-        background-color: #fff;
-        padding: 10px;
-        border-radius: 0px 0px 4px 4px;
-              
-        }
-        
-            nav ul li:hover ul { 
-        display: block;
-              
-        }
-        
-        
-        
-         nav ul li ul li  { 
-        width: 100px;
-        border-radius: 4px;
-        }
-          nav ul li ul li a { 
-        padding: 8px 14px;
-        }
-        
-        nav ul li ul li a:hover { 
-        background-color: palevioletred;       
-        }
-
-
-
-    </style>
-    <meta charset='utf-8'>
+ </style>
+ <meta charset='UTF-8'>
     
   
-     <title>TO Do List</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+ <title>Huskeliste</title>
+ <meta name='viewport' content='width=device-width, initial-scale=1'>
        
     
-</head>
-<body>
-
-	<nav>
-        <p>Samling klubb</p>
-        <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="Todolist.html">ToDoList</a></li>
-        <li><a href="kalender.html">Kalender</a></li>
-        <li><a href="minside.html">Minside</a></li>
-        <li><a href="#">Bruker</a>
-            <ul>
-             <li><a href="#">Logginn</a></li>
-                <li><a href="#">Registrerdeg</a></li>
- 
-            </ul>
-            
-            
-            </li>
-
-        
-        </ul>
-        
-        
-        
-		</nav>    
-		
-
-		
-    <h1><span class="title">To Do List</span></h1>
+ </head>
+ <body>
+    <h1><span class="title">Huskeliste</span></h1>
     <div class="inputDiv">
-    	   <input type="text" class="input" placeholder="What To Do...">
-    	   <button class="add"><i class="fas fa-plus"></i></button>
+    <input type="text" class="input" placeholder="...">
+    <button class="add"><i class="fas fa-plus"></i></button>
     </div>
     <div class="container">
     </div>
     <script>
-        const container = document.querySelector('.container');
-var inputValue = document.querySelector('.input');
-const add = document.querySelector('.add');
+    const container = document.querySelector('.container');
+ var inputValue = document.querySelector('.input');
+ const add = document.querySelector('.add');
 
-if(window.localStorage.getItem("todos") == undefined){
+ if(window.localStorage.getItem("todos") == undefined){
      var todos = [];
      window.localStorage.setItem("todos", JSON.stringify(todos));
-}
+ }
 
-var todosEX = window.localStorage.getItem("todos");
-var todos = JSON.parse(todosEX);
+ var todosEX = window.localStorage.getItem("todos");
+ var todos = JSON.parse(todosEX);
 
 
-class item{
+ class item{
 	constructor(name){
 		this.createItem(name);
 	}
@@ -249,12 +155,12 @@ class item{
 
     	var edit = document.createElement('button');
     	edit.classList.add('edit');
-    	edit.innerHTML = "EDIT";
+    	edit.innerHTML = "REDIGER";
     	edit.addEventListener('click', () => this.edit(input, name));
 
     	var remove = document.createElement('button');
     	remove.classList.add('remove');
-    	remove.innerHTML = "REMOVE";
+    	remove.innerHTML = "FJERN";
     	remove.addEventListener('click', () => this.remove(itemBox, name));
 
     	container.appendChild(itemBox);
@@ -306,10 +212,6 @@ for (var v = 0 ; v < todos.length ; v++){
     new item(todos[v]);
 }
 
-
-new item("Oppgave1");
-
-
-    </script>
+</script>
 </body>
 </html>
