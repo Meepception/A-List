@@ -5,15 +5,12 @@
 </head>
 <body>
 	<style>
-              
-        
- select#portfolio {
+    select#portfolio {
     font-size: 51px;
     color: #FF9800;
     background: #71532c;
 }
-
-	</style>
+</style>
     
 <form name="webpage">
 <select name="portfolio" id="portfolio">
@@ -23,8 +20,6 @@
 
 </select>
 </form>
-
-
 <script>
 var urlMenu = document.getElementById('portfolio');
 urlMenu.onchange = function()
@@ -33,10 +28,7 @@ var userOption = this.options[this.selectedIndex];
 if (userOption.value != "nothing")
 {
 window.open(userOption.value, "HTML todolist Kalender ", "");
-}
-
-}
-
+} }
 </script>
 </body>
 </html>
