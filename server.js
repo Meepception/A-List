@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const {
   Router
 } = require('express');
-const secureEndpoints = require("./modules/secureEndpoints")
 const user = require("./modules/user")
 
 const server = express();
@@ -14,7 +13,7 @@ server.set('port', port);
 server.use(express.static('public'));
 server.use(bodyParser.json());
 // https://expressjs.com/en/guide/routing.html
-server.use("/secure", secureEndpoints);
+
 
 
 server.post("/user", async function (req, res) {

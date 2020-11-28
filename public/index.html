@@ -1,54 +1,114 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-<title>Registrer deg</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-</head>
+    <style>
+ * {  margin: 0;
+     padding: 0;
+     
 
- <style>
-  body {
-    background-color:#161313;
-  }
-  
-  .container {
-  background-color: #1d1d20;
-  font-family: "arial";
-}
- </style>
+    
+    
+    }
+    body {
+        background-image: url(rahul-viswanath-wFmBUIzlUGY-unsplash.jpg);
+        background-size: cover;
+    
+    }
+        
+    nav {
+        width: 100%;
+        height: 60px;
+        background-color: #fff;
+        }   
+             
+    nav p {
+        font-family: sans-serif;
+        color: #222;
+        font-size: 24px;
+        line-height: 55px;
+        float: left;
+        padding: 0px 30px;
+        }
+              
+    nav ul {
+        float: left;
+        }
+                   
+    nav ul li {
+        float: left;
+        list-style: none;
+        position: relative;
+        }
+         nav ul li a { 
+        display: block;
+        font-family: sans-serif;
+        color: #222;
+        font-size: 14px;
+        padding: 22px 14px;  
+        text-decoration: none;
+        }
+        
+          nav ul li ul { 
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 0px 0px 4px 4px;
+              
+        }
+        
+            nav ul li:hover ul { 
+        display: block;
+              
+        }
+        
+        
+        
+         nav ul li ul li  { 
+        width: 100px;
+        border-radius: 4px;
+        }
+          nav ul li ul li a { 
+        padding: 8px 14px;
+        }
+        
+        nav ul li ul li a:hover { 
+        background-color: palevioletred;       
+        }
+        
+        
+        
+    </style>
+    
+    <title></title>
+    </head>
+    <body>
+        <nav>
+            <p>A-LIST</p>
+            <ul>
+            <li><a href="index.html">Hjem</a></li>
+            <li><a href="Huskeliste.html">Huskeliste</a></li>
+            <li><a href="kalender.html">Kalender</a></li>
+            <li><a href="minside.html">Min Side</a></li>
+            <li><a href="#">Bruker</a>
+                <ul>
+                 <li><a href="Logginn.html">Logg inn</a></li>
+                    <li><a href="Registrerdeg.html">Registrer deg</a></li>
+        
+                </ul>
+                
+                
+                </li>
+        
+            
+            </ul>
+            
+            
+            
+            </nav>  
+        
+        
+        
+    </body>
 
- <body>
- <h1 style="color: white; font-family: Bahnschrift;">A-LIST</h1> 
- </body>
-
- <head>
- <meta charset="UTF-8">
- </head>
-
- <div class="container">
-
- <div id="login">
-
-
- <fieldset class="clearfix">
-
- <h3 style="color: white; font-family: Bahnschrift;">Fornavn</h3> 
- <p><span class="arial"></span><input type="text" value="Fornavn" onBlur="if(this.value == '') this.value = 'Fornavn'" onFocus="if(this.value == 'Fornavn') this.value = ''" required></p> 
- <h3 style="color: white; font-family: Bahnschrift;">Etternavn</h3> 
- <p><span class="arial"></span><input type="text"  value="Etternavn" onBlur="if(this.value == '') this.value = 'Etternavn'" onFocus="if(this.value == 'Etternavn') this.value = ''" required></p> 
- <h3 style="color: white; font-family: Bahnschrift;">E-postadresse</h3> 
- <p><span class="arial"></span><input type="text"  value="E-postadresse" onBlur="if(this.value == '') this.value = 'E-postadresse'" onFocus="if(this.value == 'E-postadresse') this.value = ''" required></p> 
- <h3 style="color: white; font-family: Bahnschrift;">Skole/Universitet</h3> 
- <p><span class="arial"></span><input type="text" value="Skole/Universitet" onBlur="if(this.value == '') this.value = 'Skole/Universitet'" onFocus="if(this.value == 'Skole/Universitet') this.value = ''" required></p> 
- <h3 style="color: white; font-family: Bahnschrift;">Studieretning</h3> 
- <p><span class="arial"></span><input type="text" value="Studieretning" onBlur="if(this.value == '') this.value = 'Studieretning'" onFocus="if(this.value == 'Studieretning') this.value = ''" required></p> 
- <h3 style="color: white; font-family: Bahnschrift;">Passord</h3> 
- <p><span class="arial"></span><input type="text"  value="Passord" onBlur="if(this.value == '') this.value = 'Passord'" onFocus="if(this.value == 'Passord') this.value = ''" required></p> 
- <h3 style="color: white; font-family: Bahnschrift;">Profilbilde</h3> 
- <input type="file" id="img" name="img" accept="image/*">
- <h2 style="color: white; font-family: Bahnschrift;"></h2> 
- <button onclick="window.location.href='Bruker.html'">Registrer deg</button>
- 
- </fieldset>
-
- </html>
+</html>

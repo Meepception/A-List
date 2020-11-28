@@ -1,0 +1,2 @@
+module.exports.credentials = "postgres://fuoolkgzqcubhq:d1c3fe6f2b0ba15f381dc900ff06bc44ded490ad860a2037d520a69fbfb162c5@ec2-3-248-4-172.eu-west-1.compute.amazonaws.com:5432/dcpbutbv1ujj05";
+module.exports.hashSecret = "keyWord";

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100%;
+    background-color: #161313;
+    box-sizing: border-box;
+}
+
+h1 {
+	color: #fff;
+	font-size: 3rem;
+	font-weight: 50;
+	text-align: center;
+	margin: 1rem 0 3rem; 
+	font-family: 'Bahnschrift', sans-serif;
+}
+
+.title{
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+
+.inputDiv{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.input{
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: none;
+    height: 50px;
+    border-radius: 25px;
+    width: 350px;
+    margin: 0.25rem;
+    transition: .5s;
+    font-size: 1.15rem;
+}
+
+.add{
+	outline: none;
+    border: none;
+    height: 50px;
+    border-radius: 25px;
+    width: 50px;
+    background-color: #d1002c;
+    cursor: pointer;
+    transition: .5s;
+    margin: 0.25rem;
+}
+
+.add:hover{
+	opacity: 0.7;
+}
+
+.container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin-top: 2rem;
+	
+}
+
+.item{
+	padding: 0.5rem;
+	border-bottom: 5px solid #fff;
+	margin-bottom: 1.5rem;
+}
+
+.item_input{
+	background: none;
+	outline: none;
+	border: none;
+	color: #fff;
+	font-size: 1.4rem;
+	width: 370px;
+}
+
+.remove{
+	background: none;
+	outline: none;
+	border: none;
+	color: #d1002c;
+	font-size: 1.4rem;
+	font-family: 'Bahnschrift', sans-serif;
+	cursor: pointer;
+}
+
+.edit{
+	background: none;
+	outline: none;
+	border: none;
+	color: #fff;
+	font-size: 1.4rem;
+	font-family: 'Bahnschrift', sans-serif;
+	margin: 0 0.5rem;
+	cursor: pointer;
+}
+
+nav {
+        width: 100%;
+        height: 60px;
+        background-color: #fff;
+        }   
+             
+    nav p {
+        font-family: sans-serif;
+        color: #222;
+        font-size: 24px;
+        line-height: 55px;
+        float: left;
+        padding: 0px 30px;
+        }
+              
+    nav ul {
+        float: left;
+        }
+                   
+    nav ul li {
+        float: left;
+        list-style: none;
+        position: relative;
+        }
+         nav ul li a { 
+        display: block;
+        font-family: sans-serif;
+        color: #222;
+        font-size: 14px;
+        padding: 22px 14px;  
+        text-decoration: none;
+        }
+        
+          nav ul li ul { 
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 0px 0px 4px 4px;
+              
+        }
+        
+            nav ul li:hover ul { 
+        display: block;
+              
+        }
+        
+        
+        
+         nav ul li ul li  { 
+        width: 100px;
+        border-radius: 4px;
+        }
+          nav ul li ul li a { 
+        padding: 8px 14px;
+        }
+        
+        nav ul li ul li a:hover { 
+        background-color: palevioletred;       
+        }
+
+
+
+</style>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+  <nav>
+    <p>A-LIST</p>
+    <ul>
+    <li><a href="index.html">Hjem</a></li>
+    <li><a href="Huskeliste.html">Huskeliste</a></li>
+    <li><a href="kalender.html">Kalender</a></li>
+    <li><a href="minside.html">Min Side</a></li>
+    <li><a href="#">Bruker</a>
+        <ul>
+         <li><a href="Logginn.html">Logg inn</a></li>
+            <li><a href="Registrerdeg.html">Registrer deg</a></li>
+
+        </ul>
+        
+        
+        </li>
+
+    
+    </ul>
+    
+    
+    
+    </nav>
+ </style>
+ <meta charset='UTF-8'>
+    
+  
+ <title>Huskeliste</title>
+ <meta name='viewport' content='width=device-width, initial-scale=1'>
+       
+    
+ </head>
+ <body>
+    <h1><span class="title">Huskeliste</span></h1>
+    <div class="inputDiv">
+    <input type="text" class="input" placeholder="...">
+    <button class="add"><i class="fas fa-plus"></i></button>
+    </div>
+    <div class="container">
+    </div>
+    <script>
+    const container = document.querySelector('.container');
+ var inputValue = document.querySelector('.input');
+ const add = document.querySelector('.add');
+
+ if(window.localStorage.getItem("todos") == undefined){
+     var todos = [];
+     window.localStorage.setItem("todos", JSON.stringify(todos));
+ }
+
+ var todosEX = window.localStorage.getItem("todos");
+ var todos = JSON.parse(todosEX);
+
+
+ class item{
+	constructor(name){
+		this.createItem(name);
+	}
+    createItem(name){
+    	var itemBox = document.createElement('div');
+        itemBox.classList.add('item');
+
+    	var input = document.createElement('input');
+    	input.type = "text";
+    	input.disabled = true;
+    	input.value = name;
+    	input.classList.add('item_input');
+
+    	var edit = document.createElement('button');
+    	edit.classList.add('edit');
+    	edit.innerHTML = "REDIGER";
+    	edit.addEventListener('click', () => this.edit(input, name));
+
+    	var remove = document.createElement('button');
+    	remove.classList.add('remove');
+    	remove.innerHTML = "FJERN";
+    	remove.addEventListener('click', () => this.remove(itemBox, name));
+
+    	container.appendChild(itemBox);
+
+        itemBox.appendChild(input);
+        itemBox.appendChild(edit);
+        itemBox.appendChild(remove);
+
+    }
+
+    edit(input, name){
+        if(input.disabled == true){
+           input.disabled = !input.disabled;
+        }
+    	else{
+            input.disabled = !input.disabled;
+            let indexof = todos.indexOf(name);
+            todos[indexof] = input.value;
+            window.localStorage.setItem("todos", JSON.stringify(todos));
+        }
+    }
+
+    remove(itemBox, name){
+        itemBox.parentNode.removeChild(itemBox);
+        let index = todos.indexOf(name);
+        todos.splice(index, 1);
+        window.localStorage.setItem("todos", JSON.stringify(todos));
+    }
+}
+
+add.addEventListener('click', check);
+window.addEventListener('keydown', (e) => {
+	if(e.which == 13){
+		check();
+	}
+})
+
+function check(){
+	if(inputValue.value != ""){
+		new item(inputValue.value);
+        todos.push(inputValue.value);
+        window.localStorage.setItem("todos", JSON.stringify(todos));
+		inputValue.value = "";
+	}
+}
+
+
+for (var v = 0 ; v < todos.length ; v++){
+    new item(todos[v]);
+}
+
+</script>
+</body>
+</html>
