@@ -26,7 +26,7 @@ server.post("/user", async function (req, res) {
 
 
 
-server.get("/todo", async function (req, res) {
+server.post("/todo", async function (req, res) {
   let result = await dataHandler.todoGet();
   if (result === null) {
     res.status(404).json({ msg: "No lists found" }).end();
