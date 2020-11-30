@@ -1,0 +1,1 @@
+module.exports.credentials = "postgres://hxnmpaxmeujmxt:26f6d9cf0ffe2ae58310334df815116c6ed94928f9b29946c9eaa75915ca3976@ec2-18-210-90-1.compute-1.amazonaws.com:5432/d86d0ra7pmlmrf"
