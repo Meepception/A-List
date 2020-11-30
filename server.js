@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
 const dataHandler = require('./modules/dataHandler.js')
 
 const server = express();
@@ -17,6 +18,13 @@ server.listen(server.get('port'), function () {
 });
 
 //REST STUFF
+server.post("/user", async function (req, res) {
+  const newUser = new user(req.body.username, req.body.password);
+  await newUser.create();
+  res.status(200).json(newUser).end();
+});
+
+
 
 server.get("/todo", async function (req, res) {
   let result = await dataHandler.todoGet();
