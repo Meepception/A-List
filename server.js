@@ -1,7 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const user = require("./modules/user");
-const { toUnicode } = require('punycode');
 const dataHandler = require('./modules/dataHandler.js')
 
 const server = express();
