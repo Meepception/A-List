@@ -45,7 +45,51 @@ class StorageHandler {
 
         return results;
     }
+    async todo(params) {
+        const client = new pg.Client(this.credentials);
+        let results = null;
+        try {
+            await client.connect();
+            results = await client.query('INSERT INTO "public"."list"("todo") VALUES($1) RETURNING *;', [params]);
+            results = results.rows[0].message;
+            client.end();
+        } catch (err) {
+            client.end();
+            results = err;
+        }
 
+        return results;
+    }
+    async todoGet() {
+        const client = new pg.Client(this.credentials);
+        let results = null;
+        try {
+            await client.connect();
+            results = await client.query('SELECT * FROM "public".list');
+            client.end();
+        } catch (err) {
+            client.end();
+            results = err;
+        }
+        if (results.rows.length != 0){
+            return results.rows;
+        } else {
+            return null; 
+        }
+        
+    }
+    async purge() {
+        const client = new pg.Client(this.credentials);
+        let results = null;
+        try {
+            await client.connect();
+            results = await client.query('DELETE FROM "public"."list"');
+            client.end();
+        } catch (err) {
+            client.end();
+            results = err;
+        }    
+    }
 
 }
 
