@@ -1,8 +1,8 @@
 {
-  "name": "a-list",
+  "name": "a-list4",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "localenv.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

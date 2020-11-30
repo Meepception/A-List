@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
 const dataHandler = require('./modules/dataHandler.js')
 
 const server = express();
@@ -9,7 +10,6 @@ const port = (process.env.PORT || 8080);
 server.set('port', port);
 server.use(express.static('public'));
 server.use(bodyParser.json());
-// https://expressjs.com/en/guide/routing.html
 
 
 server.listen(server.get('port'), function () {
@@ -17,6 +17,8 @@ server.listen(server.get('port'), function () {
 });
 
 //REST STUFF
+
+
 
 server.get("/todo", async function (req, res) {
   let result = await dataHandler.todoGet();
