@@ -17,13 +17,6 @@ server.listen(server.get('port'), function () {
 });
 
 //REST STUFF
-server.post("/user", async function (req, res) {
-  const newUser = new user(req.body.username, req.body.password);
-  await newUser.create();
-  res.status(200).json(newUser).end();
-});
-
-
 
 server.get("/todo", async function (req, res) {
   let result = await dataHandler.todoGet();
