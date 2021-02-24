@@ -28,14 +28,52 @@
 
  <div class="container">
 
- <div id="login">
+ <field id="login">
 
- <fieldset class="clearfix">
+  <fieldset class="clearfix">
 
- <p><span class="arial"></span><input type="text" value="Brukernavn" onBlur="if(this.value == '') this.value = 'Brukernavn'" onFocus="if(this.value == 'Brukernavn') this.value = ''" required></p> 
- <p><span class="arial"></span><input type="password"  value="Passord" onBlur="if(this.value == '') this.value = 'Passord'" onFocus="if(this.value == 'Passord') this.value = ''" required></p> 
- <button onclick="window.location.href='minside.html'">Logg inn</button> <button onclick="window.location.href='Registrerdeg.html'">Registrer deg</button> 
+   <h3 style="color: white; font-family: Bahnschrift;">Brukernavn</h3>
+   <p><span class="arial"></span><input id="user" value="Brukernavn" type="text"></p>
+   <h3 style="color: white; font-family: Bahnschrift;">Passord</h3>
+   <p><span class="arial"></span><input id="pass" value="Passord" type="password"></p>
+ <button id="login">Logg inn</button>
+   <button onclick="document.location='index.html'"> Registrer deg istedenfor </button>
  
- </fieldset>
+  </fieldset>
+
+ <script>
+   let user = document.getElementById('user');
+   let pass = document.getElementById('pass');
+   let login = document.getElementById('login');
+
+  login.addEventListener('click', async ()=>{
+
+    let username = user.value
+    let password = pass.value
+
+    credentials = "Basic " + window.btoa(`${username}:${password}`)
+
+    let config = {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+            "authorization": credentials
+        }
+    }
+
+    let result = await fetch('/login', config);
+    console.log(result);
+    if(result.status === 200){
+
+      sessionStorage.setItem('user', username);
+
+      location.href = 'hovedmeny.html';
+    }
+
+
+  });
+
+
+ </script>
 
  </html>
