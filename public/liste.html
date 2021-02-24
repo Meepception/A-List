@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    * {  margin: 0;
+        padding: 0;
+
+
+
+
+    }
+    body {
+        background-color: #817e7e;
+
+
+
+    }
+
+
+
+    nav {
+        width: 100%;
+        height: 60px;
+        background-color: #fff;
+    }
+
+    nav p {
+        font-family: sans-serif;
+        color: #222;
+        font-size: 24px;
+        line-height: 55px;
+        float: left;
+        padding: 0px 30px;
+    }
+
+    nav ul {
+        float: left;
+    }
+
+    nav ul li {
+        float: left;
+        list-style: none;
+        position: relative;
+    }
+    nav ul li a {
+        display: block;
+        font-family: sans-serif;
+        color: #222;
+        font-size: 14px;
+        padding: 22px 14px;
+        text-decoration: none;
+    }
+
+    nav ul li ul {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 0px 0px 4px 4px;
+
+    }
+
+    nav ul li:hover ul {
+        display: block;
+
+    }
+
+
+
+    nav ul li ul li  {
+        width: 100px;
+        border-radius: 4px;
+    }
+    nav ul li ul li a {
+        padding: 8px 14px;
+    }
+
+    nav ul li ul li a:hover {
+        background-color: palevioletred;
+    }
+
+
+
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>Liste</title>
+</head>
+
+<nav>
+    <p>A-LIST</p>
+    <ul>
+        <li><a href="hovedmeny.html">Hjem</a></li>
+        <li><a href="index.html">Huskeliste</a></li>
+        <li><a href="#">Bruker</a>
+            <ul>
+                <li><a href="logginn.html">Logg inn</a>
+                </li>
+                <li><a href="registrerdeg.html">Registrer
+                    deg</a></li>
+
+            </ul>
+
+
+        </li>
+
+
+    </ul>
+
+
+
+</nav>
+
+<body>
+    <h1 id="hovedoverskrift">Ingen aktive lister</h1>
+    <h2>Gi nytt navn til lista</h2>
+    <label for="nyttNavn">Nytt navn på lista: </label>
+    <input id="nyttNavn" type="text" /><br><br>
+    <button id="giNyttNavn">Endre navn</button>
+    
+    <hr>
+    <h2>Endre oppgave</h2>
+    <label for="oppgaveID">Oppgave ID: </label>
+    <input id="oppgaveID" type="text" />
+    <br><br>
+    <label for="endreTil">Ny oppgave: </label>
+    <input id="endreTil" type="text" /><br><br>   
+    <button id="endreOppgave">Endre oppgave</button>
+
+    <hr>
+
+    <h2>Legg til ny oppgave</h2>
+    <label for="nyOppgave">Ny oppgave: </label>
+    <input id="nyOppgave" type="text" /><br><br>
+    <button id="lagOppgave">Opprett ny oppgave</button>
+    <button id="slettListe">Slett liste</button>
+
+    <div class="container">
+        <div id="resContainer"></div>
+
+    </div>
+
+
+</body>
+<script>
+    let hovedoverskrift = document.getElementById('hovedoverskrift');
+    let nyOppgave = document.getElementById('nyOppgave');
+    let lagOppgave = document.getElementById('lagOppgave');
+    let slettListe = document.getElementById('slettListe');
+    let giNyttNavn = document.getElementById('giNyttNavn');
+    let nyttNavn = document.getElementById('nyttNavn');
+
+    let oppgaveID = document.getElementById('oppgaveID');
+    let endreTil = document.getElementById('endreTil');
+    let endreOppgave = document.getElementById('endreOppgave');
+
+
+    const resContainer = document.getElementById("resContainer");
+
+    hovedoverskrift.innerHTML = sessionStorage.getItem('aktivliste');
+
+    loadItems();
+
+    endreOppgave.addEventListener('click', async ()=>{
+        console.log(endreTil.value);
+
+        const url = '/updateItem';
+        const config = {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: oppgaveID.value,
+                nyOppgave: endreTil.value
+            })
+        }
+
+        let result = await fetch(url, config);
+        if(result.status === 200){
+            console.log('OK');
+            resContainer.innerHTML = '';
+            loadItems();
+
+        } else {
+            console.log('Cannot update item');
+        }
+
+    });
+
+    giNyttNavn.addEventListener('click', async ()=>{
+
+        const url = '/updateList';
+
+        const config = {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                nyttNavn: nyttNavn.value,
+                gammeltNavn: sessionStorage.getItem('aktivliste')
+            })
+        }
+
+        let result = await fetch(url, config);
+        if(result.status === 200){
+            console.log('Liste oppdatert');
+            sessionStorage.setItem('aktivliste', nyttNavn.value);
+            hovedoverskrift.innerHTML = nyttNavn.value;
+        } else {
+            console.log(result);
+        }
+
+
+
+    });
+
+    slettListe.addEventListener('click', async () => {
+
+        //Trenger kun listenavn for å slette
+        const url = '/deleteList';
+
+        const config = {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                listenavn: sessionStorage.getItem('aktivliste')
+            })
+        }
+        
+        let result = await fetch(url, config);
+        
+        if (result.status === 200) {
+            console.log('Liste slettet');
+            location.href="index.html";
+        } else {
+            console.log('Something went wrong');
+        }
+
+    });
+
+
+    lagOppgave.addEventListener('click', async () => {
+        const url = '/createItem';
+        const config = {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: sessionStorage.getItem('user'),
+                listeNavn: sessionStorage.getItem('aktivliste'),
+                oppgave: nyOppgave.value
+            })
+        }
+        let result = await fetch(url, config);
+        if (result.status === 200) {
+            console.log('OK');
+            resContainer.innerHTML = '';
+            loadItems();
+        } else {
+            console.log('Something went wrong');
+        }
+    });
+
+    async function loadItems() {
+
+        let config = {
+            method: "GET",
+            headers: {
+                'content-type': 'application/json',
+                "user": sessionStorage.getItem('user'),
+                "listenavn": sessionStorage.getItem('aktivliste')
+            }
+        }
+
+        try {
+            let response = await fetch("/items", config);
+            let data = await response.json();
+            console.log(data);
+
+
+            if (response.status === 200) {
+                for (let result of data) {
+                    let listDiv = document.createElement("div");
+                    let list = `
+                        <h3>ID ${result.listeitemID}: ${result.listeitem}</h3>                       
+                    `;
+                    listDiv.innerHTML = list;
+                    resContainer.appendChild(listDiv);
+
+                    listDiv.addEventListener('click', async (e) => {
+                        let oppgave = e.target.innerHTML;
+
+                        let id = oppgave.split(':');
+                        let idNumber = id[0].split(' ')[1];
+
+                        const url = '/deleteItem';
+
+                        const config = {
+                            method: 'post',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id: idNumber
+                            })
+                        }
+
+                        let result = await fetch(url, config);
+                        if (result.status === 200) {
+                            resContainer.innerHTML = '';
+                            loadItems();
+                        } else {
+                            console.log('Something went wrong');
+                        }
+
+
+                    });
+
+                }
+            } else if (response.status === 404) {
+                resTxt.innerText = "No lists found";
+            }
+        }
+        catch (err) {
+            console.log("Something went wrong.");
+            console.log(err);
+        }
+    }
+
+
+
+</script>
+
+</html>
